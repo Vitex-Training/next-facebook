@@ -21,7 +21,9 @@
       }
     ],
     "paths": {
-      "src/*": ["./src/*"]
+      "src/*": ["./src/*"],
+      "__shad/*": ["./__shad/*"],
+      "services/*": ["./services/*"]
     },
     "target": "ES2017"
   },

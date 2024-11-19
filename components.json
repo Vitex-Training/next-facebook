@@ -16,5 +16,6 @@
     "ui": "__shad/components/ui",
     "lib": "__shad/lib",
     "hooks": "__shad/hooks"
-  }
+  },
+  "iconLibrary": "lucide"
 }
