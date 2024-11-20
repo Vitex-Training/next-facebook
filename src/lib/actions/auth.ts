@@ -1,6 +1,7 @@
 import { FirebaseError } from 'firebase/app';
 import { browserSessionPersistence, setPersistence, signInWithEmailAndPassword, signOut } from 'firebase/auth';
-import { auth } from 'services/firebase';
+import { LoginFormType } from 'src/app/(pages)/(public)/(auth)/login/page';
+import { auth } from 'src/services/firebase';
 export const login = async (data: LoginFormType) => {
   const { email, password } = data;
   try {
@@ -11,9 +12,9 @@ export const login = async (data: LoginFormType) => {
   } catch (error: unknown) {
     if (error instanceof FirebaseError) {
       const errorCode = error.code;
-      const [service, stringCode] = errorCode.split('/');
+      const stringCode = errorCode.split('/')[1];
       let errorMessage = error.message;
-      console.log(error);
+
       switch (stringCode) {
         case 'invalid-credential':
           errorMessage = 'Password is not valid';

@@ -1,17 +1,18 @@
 'use client';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation } from '@tanstack/react-query';
-import { Button } from '__shad/components/ui/button';
 import { CircleAlert, Eye, EyeOff } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
-import FormWrapper from 'src/components/common/FormWrapper';
-import SmallLoading from 'src/components/common/SmallLoading';
+import FormWrapper from 'src/(shared/components)/common/FormWrapper';
+import SmallLoading from 'src/(shared/components)/loading/SmallLoading';
 import { login } from 'src/lib/actions/auth';
 import { z } from 'zod';
+
+import { Button } from '../../../../../../__shad/components/ui/button';
 
 export const LoginFormSchema = z.object({
   email: z.string({
@@ -21,6 +22,8 @@ export const LoginFormSchema = z.object({
     required_error: 'This field is required',
   }),
 });
+
+export type LoginFormType = z.infer<typeof LoginFormSchema>;
 
 export default function Page() {
   const [showPwd, setShowPwd] = useState(false);
@@ -86,9 +89,9 @@ export default function Page() {
               placeholder='Email address or phone number'
               type='text'
               {...register('email')}
-              autoFocus
               autoComplete='email'
-              className='w-full rounded-md border border-gray-10 px-[16px] py-[14px] text-[17px] leading-[22px] placeholder-gray-500 focus:placeholder-gray-300 focus:outline-none focus:outline-offset-2 focus:ring-2 focus:ring-transparent'
+              autoFocus
+              className='w-full rounded-md border border-gray-10 px-[16px] py-[14px] text-[17px] leading-[22px] placeholder:text-gray-500 focus:placeholder-gray-300 focus:outline-none focus:outline-offset-2 focus:ring-2 focus:ring-transparent'
             />
           </div>
           <div className='relative'>
@@ -100,12 +103,17 @@ export default function Page() {
               autoComplete='current-password'
               className='w-full rounded-md border border-gray-10 px-[16px] py-[14px] text-[17px] leading-[22px] placeholder:text-gray-500 focus:outline-none focus:outline-offset-2 focus:ring-2 focus:ring-transparent focus:placeholder:text-gray-300'
             />
-            <div className='absolute right-[12px] top-[50%] translate-y-[-50%] cursor-pointer' onClick={handleShowPwd}>
+
+            <button
+              aria-label={showPwd ? 'Hide password' : 'Show password'}
+              className='absolute right-[12px] top-[50%] translate-y-[-50%] cursor-pointer'
+              onClick={handleShowPwd}>
               {showPwd ? <Eye size={14} /> : <EyeOff size={14} />}
-            </div>
+            </button>
           </div>
           <Button
-            className='w-full rounded-md bg-blue-10 p-[10px] text-lg font-semibold text-white-0 hover:bg-blue-40'
+            className='bg-blue-10 text-lg font-semibold hover:bg-blue-40'
+            disabled={mutation.isPending}
             type='submit'>
             Log in
           </Button>
