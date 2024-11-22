@@ -1,8 +1,8 @@
 'use client';
 import { useMutation } from '@tanstack/react-query';
 import Link from 'next/link';
-import { logout } from 'src/lib/actions/auth';
-import { auth } from 'src/services/firebase';
+import { logout } from 'src/shared/services/firebase/auth';
+import { auth } from 'src/shared/services/firebase/config';
 
 export default function Page() {
   const user = auth.currentUser;

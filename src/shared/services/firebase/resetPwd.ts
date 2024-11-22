@@ -1,7 +1,7 @@
 import { FirebaseError } from 'firebase/app';
 import { EmailAuthProvider, reauthenticateWithCredential, updatePassword } from 'firebase/auth';
 import { ResetPwdFormType } from 'src/app/(pages)/(private)/reset-password/page';
-import { auth } from 'src/services/firebase';
+import { auth } from 'src/shared/services/firebase/config';
 
 export const resetPwd = async (data: ResetPwdFormType) => {
   const user = auth.currentUser;
@@ -21,8 +21,12 @@ export const resetPwd = async (data: ResetPwdFormType) => {
       }
     }
   } catch (error) {
-    const cusError = new Error('Current password is incorrect. Please try again.');
-    cusError.name = 'invalid-current-password';
-    throw cusError;
+    if (error instanceof FirebaseError) {
+      const cusError = new Error('Current password is incorrect. Please try again.');
+      cusError.name = 'invalid-current-password';
+      throw cusError;
+    } else {
+      throw new Error('Unknown error');
+    }
   }
 };

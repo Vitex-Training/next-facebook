@@ -7,12 +7,11 @@ import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
-import FormWrapper from 'src/(shared/components)/common/FormWrapper';
-import SmallLoading from 'src/(shared/components)/loading/SmallLoading';
-import { login } from 'src/lib/actions/auth';
+import { Button } from 'src/shared/components/button/Button';
+import FormWrapper from 'src/shared/components/form/FormWrapper';
+import SmallLoading from 'src/shared/components/loading/SmallLoading';
+import { login } from 'src/shared/services/firebase/auth';
 import { z } from 'zod';
-
-import { Button } from '../../../../../../__shad/components/ui/button';
 
 export const LoginFormSchema = z.object({
   email: z.string({
@@ -61,7 +60,7 @@ export default function Page() {
   return (
     <main className='flex flex-col items-center p-2 pt-[36px] sm:p-0'>
       <div className='text-center'>
-        <Image alt='Facebook' className='inline' height={81} priority src='/logo/text-logo-79x204.svg' width={240} />
+        <Image alt='Facebook' className='inline' height={81} src='/logo/text-logo-79x204.svg' width={240} />
       </div>
       {redirectUrl && (
         <div className='relative mx-auto mb-[12px] max-w-screen-sm rounded-[3px] border border-blue-40 bg-blue-40 pl-[40px] md:w-[612px]'>
@@ -85,13 +84,13 @@ export default function Page() {
           )}
           <div>
             <input
+              autoFocus
               aria-label='Email address or phone number'
+              autoComplete='email'
+              className='w-full rounded-md border border-gray-10 px-[16px] py-[14px] text-[17px] leading-[22px] placeholder:text-gray-500 focus:outline-none focus:outline-offset-2 focus:ring-2 focus:ring-transparent focus:placeholder:text-gray-300'
               placeholder='Email address or phone number'
               type='text'
               {...register('email')}
-              autoComplete='email'
-              autoFocus
-              className='w-full rounded-md border border-gray-10 px-[16px] py-[14px] text-[17px] leading-[22px] placeholder:text-gray-500 focus:placeholder-gray-300 focus:outline-none focus:outline-offset-2 focus:ring-2 focus:ring-transparent'
             />
           </div>
           <div className='relative'>
@@ -106,13 +105,13 @@ export default function Page() {
 
             <button
               aria-label={showPwd ? 'Hide password' : 'Show password'}
-              className='absolute right-[12px] top-[50%] translate-y-[-50%] cursor-pointer'
+              className='absolute right-[12px] top-1/2 -translate-y-1/2 cursor-pointer'
               onClick={handleShowPwd}>
               {showPwd ? <Eye size={14} /> : <EyeOff size={14} />}
             </button>
           </div>
           <Button
-            className='bg-blue-10 text-lg font-semibold hover:bg-blue-40'
+            className='h-11 bg-blue-10 text-lg font-semibold text-white-0 hover:bg-blue-40'
             disabled={mutation.isPending}
             type='submit'>
             Log in

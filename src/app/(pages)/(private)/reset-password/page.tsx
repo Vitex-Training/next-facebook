@@ -6,12 +6,11 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import FormWrapper from 'src/(shared/components)/common/FormWrapper';
-import { auth } from 'src/services/firebase';
+import { Button } from 'src/shared/components/button/Button';
+import FormWrapper from 'src/shared/components/form/FormWrapper';
+import { auth } from 'src/shared/services/firebase/config';
+import { resetPwd } from 'src/shared/services/firebase/resetPwd';
 import { z } from 'zod';
-
-import { resetPwd } from 'src/lib/actions/resetPwd';
-import { Button } from '../../../../../__shad/components/ui/button';
 
 const ResetPwdFormSchema = z
   .object({
@@ -177,7 +176,7 @@ export default function Page() {
               </label>
             </div>
             <Button
-              className='w-full rounded-3xl bg-blue-10 text-base text-white-0'
+              className='h-11 w-full rounded-3xl bg-blue-10 text-base text-white-0 hover:bg-blue-40 disabled:bg-blue-60'
               disabled={!methods.formState.isValid || mutation.isPending}
               type='submit'>
               Change Password
