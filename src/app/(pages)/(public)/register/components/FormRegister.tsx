@@ -10,13 +10,31 @@ import { z } from 'zod';
 
 import InputWithError from './InputWithError';
 
-const listMonths = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+const listMonths = [
+  { name: 'Jan', value: '1' },
+  { name: 'Feb', value: '2' },
+  { name: 'Mar', value: '3' },
+  { name: 'Apr', value: '4' },
+  { name: 'May', value: '5' },
+  { name: 'Jun', value: '6' },
+  { name: 'Jul', value: '7' },
+  { name: 'Aug', value: '8' },
+  { name: 'Sep', value: '9' },
+  { name: 'Oct', value: '10' },
+  { name: 'Nov', value: '11' },
+  { name: 'Dec', value: '12' },
+];
 
 const formSchema = z.object({
   account: z.union([
     z.string().email('Invalid email or phone number format'),
     z.string().regex(/^(\+?[1-9]\d{1,14}|0\d{9,10})$/, 'Invalid phone number format'),
   ]),
+  date: z.object({
+    day: z.string(),
+    month: z.string(),
+    year: z.string(),
+  }),
   firstname: z
     .string()
     .regex(/^[a-zA-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠƯàáâãèéêìíòóôõùúăđĩũơưăạảấầẩẫậắằẳẵặẹẻẽềềểễệỉịọỏốồổỗộớờởỡợụủứừửữựỳỵỷỹ\s]*$/, {
@@ -94,21 +112,21 @@ export default function FormRegister() {
               </div>
             </div>
             <div className='flex justify-between *:w-1/3'>
-              <select className='h-9 rounded-sm border border-[#ccd0d5] pl-2'>
+              <select className='h-9 rounded-sm border border-[#ccd0d5] pl-2' {...register('date.day')}>
                 {Array.from({ length: 30 }, (v, index) => (
                   <option key={index} value={String(index + 1)}>
                     {index + 1}
                   </option>
                 ))}
               </select>
-              <select className='mx-2 h-9 rounded-sm border border-[#ccd0d5] pl-2'>
+              <select className='mx-2 h-9 rounded-sm border border-[#ccd0d5] pl-2' {...register('date.month')}>
                 {listMonths.map((m, idx) => (
-                  <option key={idx} value={m}>
-                    {m}
+                  <option key={idx} value={m.value}>
+                    {m.name}
                   </option>
                 ))}
               </select>
-              <select className='h-9 rounded-sm border border-[#ccd0d5] pl-2'>
+              <select className='h-9 rounded-sm border border-[#ccd0d5] pl-2' {...register('date.year')}>
                 {Array.from({ length: 100 }, (v, index) => (
                   <option key={index} value={String(2024 - index)}>
                     {2024 - index}
