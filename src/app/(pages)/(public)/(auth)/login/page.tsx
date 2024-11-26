@@ -7,12 +7,11 @@ import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
-import FormWrapper from 'src/(shared/components)/common/FormWrapper';
-import SmallLoading from 'src/(shared/components)/loading/SmallLoading';
 import { login } from 'src/lib/actions/auth';
+import { AppButton } from 'src/shared/components/button/AppButton';
+import FormWrapper from 'src/shared/components/common/FormWrapper';
+import SmallLoading from 'src/shared/components/loading/SmallLoading';
 import { z } from 'zod';
-
-import { Button } from '../../../../../../__shad/components/ui/button';
 
 export const LoginFormSchema = z.object({
   email: z.string({
@@ -91,7 +90,7 @@ export default function Page() {
               {...register('email')}
               autoComplete='email'
               autoFocus
-              className='w-full rounded-md border border-gray-10 px-[16px] py-[14px] text-[17px] leading-[22px] placeholder:text-gray-500 focus:placeholder-gray-300 focus:outline-none focus:outline-offset-2 focus:ring-2 focus:ring-transparent'
+              className='w-full rounded-md border border-gray-10 px-[16px] py-[14px] text-[17px] leading-[22px] placeholder:text-gray-500 focus:outline-none focus:outline-offset-2 focus:ring-2 focus:ring-transparent focus:placeholder:text-gray-300'
             />
           </div>
           <div className='relative'>
@@ -106,17 +105,17 @@ export default function Page() {
 
             <button
               aria-label={showPwd ? 'Hide password' : 'Show password'}
-              className='absolute right-[12px] top-[50%] translate-y-[-50%] cursor-pointer'
+              className='absolute right-[12px] top-1/2 -translate-y-1/2 cursor-pointer'
               onClick={handleShowPwd}>
               {showPwd ? <Eye size={14} /> : <EyeOff size={14} />}
             </button>
           </div>
-          <Button
+          <AppButton
             className='bg-blue-10 text-lg font-semibold hover:bg-blue-40'
             disabled={mutation.isPending}
             type='submit'>
             Log in
-          </Button>
+          </AppButton>
 
           {mutation.isPending ? <SmallLoading /> : null}
           <div className='mx-auto pb-4 pt-1 text-center text-sm text-blue-10'>

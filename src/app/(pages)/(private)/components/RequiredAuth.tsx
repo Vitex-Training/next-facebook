@@ -12,21 +12,17 @@ export default function RequiredAuth({ children }: ChildProps) {
   const pathname = usePathname();
 
   useEffect(() => {
-    const unSubscriber = onAuthStateChanged(auth, (user) => {
-      if (user) {
-      } else {
-        const url = pathname !== '/' ? `/login?redirectUrl=${pathname}` : '/login';
-        router.push(url);
-      }
+    const unSubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) return;
+      const url = pathname !== '/' ? `/login?redirectUrl=${pathname}` : '/login';
+      router.push(url);
     });
     return () => {
-      unSubscriber();
+      unSubscribe();
     };
-  }, []);
+  }, [pathname, router]);
 
-  if (user) {
-    return <>{children}</>;
-  } else {
-    return <></>;
-  }
+  if (!user) return null;
+
+  return children;
 }
