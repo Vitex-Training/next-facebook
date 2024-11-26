@@ -71,8 +71,8 @@ export default function FormRegister() {
   } = useForm<RegisterType>({ resolver: zodResolver(formSchema) });
   const onSubmit = (data: RegisterType) => {
     registerAuth(data)
-      .then(() => {
-        router.push('/register/verify');
+      .then((userDocRef) => {
+        router.push(`/register/verify?uid=${userDocRef.id}`);
       })
       .catch(() => {
         setError('Error sign up. Please try again!');
