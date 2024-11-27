@@ -1,4 +1,4 @@
-import { ChildProps } from 'src/types/general';
+import { ChildProps } from 'src/shared/types/general';
 
 import RequiredAuth from './components/RequiredAuth';
 
