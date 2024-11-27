@@ -7,7 +7,7 @@ export default function Page() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const email: string = searchParams?.get('email') || '';
-  const name: string = searchParams?.get('firstname') || '';
+  const name: string = searchParams?.get('name') || '';
 
   const handleTryOtherWay = () => {
     router.push(`/forgot/recover?email=${email}&name=${name}`);

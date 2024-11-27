@@ -1,5 +1,5 @@
 import { getDocs, query, where } from 'firebase/firestore';
-import { User } from 'src/shared/types/user';
+import { User } from 'src/shared/types/userForgot';
 
 import { UserCollection } from './userCollection';
 

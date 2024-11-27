@@ -8,3 +8,6 @@ export interface User {
   surname: string;
   uid: string;
 }
+export interface UserError {
+  error: string;
+}

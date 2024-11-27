@@ -1,10 +1,9 @@
 'use client';
-import { User } from 'firebase/auth';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { Button } from 'src/shared/components/button/Button';
-import { UserError } from 'src/shared/types/userForgot';
+import { User, UserError } from 'src/shared/types/userForgot';
 
 import { LoginBar } from './components/LoginBar';
 export default function Page() {
@@ -27,7 +26,7 @@ export default function Page() {
       } else {
         res.json().then((res: { user: User }) => {
           // change the name prop after it is saved when a user was created
-          router.push(`/forgot/web?email=${res.user.email}&name=${res.user.email}`);
+          router.push(`/forgot/web?email=${res.user.email}&name=${res.user.firstname}`);
         });
       }
     });
