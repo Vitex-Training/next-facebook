@@ -73,7 +73,6 @@ export default [
           patterns: ['../../*'],
         },
       ],
-      'perfectionist/sort-jsx-props': 'off',
     },
   },
   eslintPluginPrettierRecommended,

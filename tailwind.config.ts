@@ -4,59 +4,17 @@ const config: Config = {
   darkMode: ['class'],
   content: [
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/components/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/app/**/*.{js,ts,jsx,tsx,mdx}'
+    './src/shared/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
     extend: {
-      borderRadius: {
-        lg: 'var(--radius)',
-        md: 'calc(var(--radius) - 2px)',
-        sm: 'calc(var(--radius) - 4px)',
-      },
       height: {
         header: 'var(--header-height)',
       },
       colors: {
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
-        blue: {
-          '9': 'rgb(232, 240, 254)',
-          '10': '#1877f2',
-          '11': '#0064E0',
-          '40': '#3578e5',
-          '50': '#166fe5',
-          '60': '#99c1f3',
-        },
-        green: {
-          '40': '#00a400',
-        },
-        gray: {
-          '10': '#dddfe2',
-          '11': '#606770',
-          '12': '#ccd0d5',
-        },
-        yellow: {
-          '10': '#fff9d7',
-          '20': '#e2c822',
-        },
-        red: {
-          '10': '#ffebe8',
-          '40': '#be4b49',
-          '41': '#dd3c10',
-        },
-        white: {
-          '0': '#fff',
-          '1': '#f3f3f47a',
-          '10': '#f2f4f7',
-          '11': '#FFFFFF',
-        },
-        black: {
-          '0': '#1d2129',
-          '1': '#1c1e21eb',
-          '2': '#1d2129ba',
-          '10': '#000000',
-        },
         card: {
           DEFAULT: 'hsl(var(--card))',
           foreground: 'hsl(var(--card-foreground))',
@@ -68,11 +26,45 @@ const config: Config = {
         primary: {
           DEFAULT: 'hsl(var(--primary))',
           foreground: 'hsl(var(--primary-foreground))',
+          accent: 'hsl(var(--primary-accent))',
+          disable: 'hsl(var(--primary-disable))',
         },
         secondary: {
           DEFAULT: 'hsl(var(--secondary))',
           foreground: 'hsl(var(--secondary-foreground))',
+          accent: 'hsl(var(--secondary-accent))',
         },
+        cancel: {
+          DEFAULT: 'hsl(var(--cancel))',
+          foreground: 'hsl(var(--cancel-foreground))',
+        },
+        icon: {
+          DEFAULT: 'hsl(var(--icon))',
+          foreground: 'hsl(var(--icon-foreground))',
+          accent: 'hsl(var(--icon-accent))',
+        },
+        ['small-icon']: {
+          DEFAULT: 'hsl(var(--small-icon))',
+          foreground: 'hsl(var(--small-icon-foreground))',
+          accent: 'hsl(var(--small-icon-accent))',
+        },
+        input: {
+          DEFAULT: 'hsl(var(--input))',
+          foreground: 'hsl(var(--input-foreground))',
+          border: 'hsl(var(--input-border))',
+          placeholder: 'hsl(var(--input-placeholder))',
+          ['focus-border']: 'hsl(var(--input-focus-border))',
+          ['error-border']: 'hsl(var(--input-error-border))',
+        },
+        error: {
+          DEFAULT: 'hsl(var(--error))',
+          border: 'hsl(var(--error-border))',
+        },
+        info: {
+          DEFAULT: 'hsl(var(--info))',
+          border: 'hsl(var(--info-border))',
+        },
+
         muted: {
           DEFAULT: 'hsl(var(--muted))',
           foreground: 'hsl(var(--muted-foreground))',
@@ -86,7 +78,6 @@ const config: Config = {
           foreground: 'hsl(var(--destructive-foreground))',
         },
         border: 'hsl(var(--border))',
-        input: 'hsl(var(--input))',
         ring: 'hsl(var(--ring))',
         chart: {
           '1': 'hsl(var(--chart-1))',
@@ -101,6 +92,7 @@ const config: Config = {
         xxs: '0 0 0 1px rgba(139, 3, 0, .75), 0 1px 10px rgba(0, 0, 0, .35)',
       },
       fontSize: {
+        ['up-base']: ['17px', '21px'],
         ['up-sm']: ['15px', '19px'],
         ['up-xs']: ['13px', '17px'],
       },

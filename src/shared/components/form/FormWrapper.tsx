@@ -1,7 +1,7 @@
 import { cva } from 'class-variance-authority';
 import { ChildProps } from 'src/shared/types/general';
 
-const form = cva(['rounded-lg', 'border', 'border-gray-300', 'bg-white-0', 'shadow-3xl']);
+const form = cva(['rounded-lg', 'border', 'bg-white', 'border-gray-300', 'bg-white', 'shadow-3xl']);
 interface Props extends ChildProps {
   readonly className?: string;
   readonly htmlProps?: React.ComponentPropsWithoutRef<'form'>;
