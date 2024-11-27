@@ -42,6 +42,7 @@ export default [
       '@typescript-eslint/no-unsafe-declaration-merging': 'error',
       '@typescript-eslint/no-explicit-any': 'error',
       'tailwindcss/classnames-order': 'off',
+      'perfectionist/sort-jsx-props': 'off',
       'react-hooks/exhaustive-deps': 'error',
       'prefer-template': 'error',
       'no-console': [

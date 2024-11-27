@@ -13,5 +13,6 @@ from React and NextJS.
 - [Jotai](https://jotai.org/): A simple and fast state management library for React.
 
 ## UI
+
 For UI library components, consider using headless UI components,
 such as [Radix](https://radix-ui.com/), [shadcn/ui](https://ui.shadcn.com/) since we are using Tailwind CSS.
