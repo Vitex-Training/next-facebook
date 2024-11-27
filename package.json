@@ -23,7 +23,6 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "firebase": "^11.0.2",
-    "firebase-admin": "^13.0.1",
     "jotai": "^2.9.3",
     "jotai-effect": "^1.0.3",
     "lodash": "^4.17.21",
