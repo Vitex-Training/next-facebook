@@ -4093,6 +4093,7 @@ __metadata:
     react: "npm:19.0.0-rc-66855b96-20241106"
     react-dom: "npm:19.0.0-rc-66855b96-20241106"
     react-hook-form: "npm:^7.53.2"
+    safe-guard-data: "npm:^1.0.1"
     sass: "npm:^1.78.0"
     tailwind-merge: "npm:^2.5.4"
     tailwindcss: "npm:^3.4.10"
@@ -4878,6 +4879,13 @@ __metadata:
   version: 5.2.1
   resolution: "safe-buffer@npm:5.2.1"
   checksum: 10c0/6501914237c0a86e9675d4e51d89ca3c21ffd6a31642efeba25ad65720bce6921c9e7e974e5be91a786b25aa058b5303285d3c15dbabf983a919f5f630d349f3
+  languageName: node
+  linkType: hard
+
+"safe-guard-data@npm:^1.0.1":
+  version: 1.0.1
+  resolution: "safe-guard-data@npm:1.0.1"
+  checksum: 10c0/40c4c533463611f6572d643928f7fa26ad11fe5de5ffe07b4208b4eb238dfc7b83669379641396c316840b34952869059d1ad5f90d58dd6688de748ad33ef219
   languageName: node
   linkType: hard
 

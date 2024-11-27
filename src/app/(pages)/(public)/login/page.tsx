@@ -7,10 +7,10 @@ import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
-import { Button } from 'src/shared/components/button/Button';
-import FormWrapper from 'src/shared/components/form/FormWrapper';
+import { login } from 'src/lib/actions/auth';
+import { AppButton } from 'src/shared/components/button/AppButton';
+import FormWrapper from 'src/shared/components/common/FormWrapper';
 import SmallLoading from 'src/shared/components/loading/SmallLoading';
-import { login } from 'src/shared/services/firebase/auth';
 import { z } from 'zod';
 
 export const LoginFormSchema = z.object({
@@ -63,8 +63,8 @@ export default function Page() {
         <Image alt='Facebook' className='inline' height={81} src='/logo/text-logo-79x204.svg' width={240} />
       </div>
       {redirectUrl && (
-        <div className='relative mx-auto mb-[12px] max-w-screen-sm rounded-[3px] border border-blue-40 bg-blue-40 pl-[40px] md:w-[612px]'>
-          <CircleAlert className='absolute left-[10px] top-[8px] rounded-full bg-white-0 text-blue-40' size='20px' />
+        <div className='border-blue-40 bg-blue-40 relative mx-auto mb-[12px] max-w-screen-sm rounded-[3px] border pl-[40px] md:w-[612px]'>
+          <CircleAlert className='bg-white-0 text-blue-40 absolute left-[10px] top-[8px] rounded-full' size='20px' />
           <div className='bg-white-0 px-[10px] py-[9px] text-sm'>You must log in to continue.</div>
         </div>
       )}
@@ -74,10 +74,10 @@ export default function Page() {
 
           {/* e2c822 */}
           {redirectUrl && (
-            <div className='border border-yellow-20 bg-yellow-10 p-[10px] text-center'>You must log in to continue</div>
+            <div className='border-yellow-20 bg-yellow-10 border p-[10px] text-center'>You must log in to continue</div>
           )}
           {mutation.isError && (
-            <div className='border border-red-41 bg-red-10 p-[10px] text-center'>
+            <div className='border-red-41 bg-red-10 border p-[10px] text-center'>
               <div className='text-sm font-semibold'>Wrong credentials</div>
               <p>{mutation.error.message || 'Something wrong'}</p>
             </div>
@@ -87,10 +87,12 @@ export default function Page() {
               autoFocus
               aria-label='Email address or phone number'
               autoComplete='email'
-              className='w-full rounded-md border border-gray-10 px-[16px] py-[14px] text-[17px] leading-[22px] placeholder:text-gray-500 focus:outline-none focus:outline-offset-2 focus:ring-2 focus:ring-transparent focus:placeholder:text-gray-300'
+              className='border-gray-10 w-full rounded-md border px-[16px] py-[14px] text-[17px] leading-[22px] placeholder:text-gray-500 focus:outline-none focus:outline-offset-2 focus:ring-2 focus:ring-transparent focus:placeholder:text-gray-300'
               placeholder='Email address or phone number'
               type='text'
               {...register('email')}
+              autoFocus
+              className='border-gray-10 w-full rounded-md border px-[16px] py-[14px] text-[17px] leading-[22px] placeholder:text-gray-500 focus:outline-none focus:outline-offset-2 focus:ring-2 focus:ring-transparent focus:placeholder:text-gray-300'
             />
           </div>
           <div className='relative'>
@@ -100,7 +102,7 @@ export default function Page() {
               type={showPwd ? 'text' : 'password'}
               {...register('password')}
               autoComplete='current-password'
-              className='w-full rounded-md border border-gray-10 px-[16px] py-[14px] text-[17px] leading-[22px] placeholder:text-gray-500 focus:outline-none focus:outline-offset-2 focus:ring-2 focus:ring-transparent focus:placeholder:text-gray-300'
+              className='border-gray-10 w-full rounded-md border px-[16px] py-[14px] text-[17px] leading-[22px] placeholder:text-gray-500 focus:outline-none focus:outline-offset-2 focus:ring-2 focus:ring-transparent focus:placeholder:text-gray-300'
             />
 
             <button
@@ -110,15 +112,15 @@ export default function Page() {
               {showPwd ? <Eye size={14} /> : <EyeOff size={14} />}
             </button>
           </div>
-          <Button
-            className='h-11 bg-blue-10 text-lg font-semibold text-white-0 hover:bg-blue-40'
+          <AppButton
+            className='bg-blue-10 hover:bg-blue-40 text-lg font-semibold'
             disabled={mutation.isPending}
             type='submit'>
             Log in
-          </Button>
+          </AppButton>
 
           {mutation.isPending ? <SmallLoading /> : null}
-          <div className='mx-auto pb-4 pt-1 text-center text-sm text-blue-10'>
+          <div className='text-blue-10 mx-auto pb-4 pt-1 text-center text-sm'>
             <Link className='hover:underline' href='/forgot'>
               Forgotten account?
             </Link>
