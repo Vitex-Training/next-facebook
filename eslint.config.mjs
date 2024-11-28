@@ -1,10 +1,10 @@
 import typescriptEslint from '@typescript-eslint/eslint-plugin';
+import { FlatCompat } from '@eslint/eslintrc';
 import tsParser from '@typescript-eslint/parser';
 import path from 'node:path';
 import perfectionist from 'eslint-plugin-perfectionist';
 import { fileURLToPath } from 'node:url';
 import js from '@eslint/js';
-import { FlatCompat } from '@eslint/eslintrc';
 import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -73,6 +73,7 @@ export default [
           patterns: ['../../*'],
         },
       ],
+      'perfectionist/sort-jsx-props': 'off',
     },
   },
   eslintPluginPrettierRecommended,
