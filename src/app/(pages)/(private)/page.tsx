@@ -1,7 +1,8 @@
 'use client';
 import { useMutation } from '@tanstack/react-query';
-import { logout } from 'src/lib/actions/auth';
-import { auth } from 'src/services/firebase';
+import Link from 'next/link';
+import { logout } from 'src/shared/services/firebase/auth/auth';
+import { auth } from 'src/shared/services/firebase/config';
 
 export default function Page() {
   const user = auth.currentUser;
@@ -17,6 +18,7 @@ export default function Page() {
     <div>
       <p>{user?.email}</p>
       <button onClick={onLogout}>Log out</button>
+      <Link href='/reset-password'>Reset password</Link>
     </div>
   );
 }
