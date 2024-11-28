@@ -4,4 +4,4 @@ export interface ChildProps {
   children: React.ReactNode;
 }
 
-export type ClickBtnEType = React.MouseEvent<HTMLButtonElement, MouseEvent>;
+export type ClickBtnEventType = React.MouseEvent<HTMLButtonElement, MouseEvent>;

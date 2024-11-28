@@ -8,11 +8,13 @@ import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { AppButton } from 'src/shared/components/button/AppButton';
 import FormWrapper from 'src/shared/components/form/FormWrapper';
-import { resetPwd } from 'src/shared/services/firebase/auth/resetPwd';
+import { AppInput } from 'src/shared/components/input/AppInput';
+import { AppLabel } from 'src/shared/components/label/AppLabel';
+import { resetPassword } from 'src/shared/services/firebase/auth/resetPassword';
 import { auth } from 'src/shared/services/firebase/config';
 import { z } from 'zod';
 
-const ResetPwdFormSchema = z
+const ResetPasswordFormSchema = z
   .object({
     confirmPassword: z.string(),
     currentPassword: z
@@ -26,7 +28,7 @@ const ResetPwdFormSchema = z
         message:
           "Choose a more secure password that you don't use anywhere else. It should be at least 6 characters and difficult for others to guess.",
       })
-      .regex(/^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!$@%]).*$/, {
+      .regex(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/, {
         message:
           "Choose a more secure password that you don't use anywhere else. It should be at least 6 characters and difficult for others to guess.",
       }),
@@ -41,25 +43,25 @@ const ResetPwdFormSchema = z
     },
   );
 
-export type ResetPwdFormType = z.infer<typeof ResetPwdFormSchema>;
-type ResetPwdFormKeys = keyof ResetPwdFormType;
+export type ResetPasswordFormType = z.infer<typeof ResetPasswordFormSchema>;
+type ResetPasswordFormKeys = keyof ResetPasswordFormType;
 
 export default function Page() {
-  const [showPwdList, setShowPwdLists] = useState<ResetPwdFormKeys[]>([]);
+  const [showPasswordList, setShowPasswordLists] = useState<ResetPasswordFormKeys[]>([]);
 
   const router = useRouter();
   const user = auth.currentUser;
 
-  const defaultValues: ResetPwdFormType = {
+  const defaultValues: ResetPasswordFormType = {
     confirmPassword: '',
     currentPassword: '',
     newPassword: '',
   };
 
-  const methods = useForm<ResetPwdFormType>({
+  const methods = useForm<ResetPasswordFormType>({
     defaultValues,
     mode: 'onChange',
-    resolver: zodResolver(ResetPwdFormSchema),
+    resolver: zodResolver(ResetPasswordFormSchema),
   });
 
   const {
@@ -72,7 +74,7 @@ export default function Page() {
   } = methods;
 
   const mutation = useMutation({
-    mutationFn: resetPwd,
+    mutationFn: resetPassword,
     onError(error) {
       if (error.name === 'invalid-current-password') {
         setError('currentPassword', { message: error.message, type: 'custom' });
@@ -82,15 +84,16 @@ export default function Page() {
       router.push('/');
     },
   });
-  const onSubmit = (data: ResetPwdFormType) => {
+  const onSubmit = (data: ResetPasswordFormType) => {
     mutation.mutate(data);
   };
-  const handleShowPwdList = (name: ResetPwdFormKeys) => {
-    setShowPwdLists((prev) => {
+  const handleShowPasswordList = (name: ResetPasswordFormKeys) => {
+    setShowPasswordLists((prev) => {
       const isAlreadyShow = prev.find((nameKey) => nameKey === name);
       if (isAlreadyShow) {
         return prev.filter((nameKey) => nameKey !== name);
-      } else return [...prev, name];
+      }
+      return [...prev, name];
     });
   };
 
@@ -105,7 +108,7 @@ export default function Page() {
     return () => subscription.unsubscribe();
   }, [watch, trigger]);
 
-  const textMap: { label: string; name: keyof ResetPwdFormType }[] = [
+  const textMap: { label: string; name: keyof ResetPasswordFormType }[] = [
     {
       label: 'Current password',
       name: 'currentPassword',
@@ -121,7 +124,7 @@ export default function Page() {
   ];
   return (
     <main>
-      <section className='mt-[40px] flex items-center justify-center'>
+      <section className='mt-[40px] flex items-center justify-center p-2'>
         <FormWrapper
           className='flex w-full flex-col gap-3 rounded-3xl p-5 sm:w-[600px]'
           onSubmit={handleSubmit(onSubmit)}>
@@ -130,45 +133,44 @@ export default function Page() {
             <span>{user?.email} · Facebook</span>
             <h1 className='text-2xl font-semibold'>Change password</h1>
             <span className='text-up-sm' id='newPassword-note'>
-              Your password must be at least 6 characters and should include a combination of numbers, letters and
-              special characters (!$@%).
+              Your password must be at least 6 characters and should include a combination of numbers, letters.
             </span>
           </div>
 
           {/* inputs  */}
           <div className='flex flex-1 flex-col gap-4'>
             {textMap.map((obj, i) => {
-              const isShowPwd = showPwdList.find((namekey) => namekey === obj.name);
+              const isShowPassword = showPasswordList.find((name) => name === obj.name);
               return (
                 <div key={i}>
                   <div
                     className={`relative flex flex-col rounded-2xl border border-input-border px-4 py-[10px] focus-within:border-input-focus-border hover:border-input-focus-border ${
                       errors[obj.name] && '!border-input-error-border'
                     }`}>
-                    <input
+                    <AppInput
                       autoFocus={i === 0}
                       {...register(obj.name)}
                       aria-describedby={obj.name === 'newPassword' ? 'newPassword-note' : ''}
                       aria-invalid={!!errors[obj.name]}
                       aria-label={obj.label}
-                      className='peer m-0 h-8 border-none pt-3 text-base outline-none placeholder:text-transparent focus-within:border-none focus-within:outline-none'
+                      className='peer m-0 h-8 border-none px-0 pt-3 text-base outline-none placeholder:text-transparent focus-within:border-none focus-within:outline-none'
                       id={obj.name}
                       placeholder={obj.label}
-                      type={isShowPwd ? 'text' : 'password'}
+                      type={isShowPassword ? 'text' : 'password'}
                     />
-                    <label
+                    <AppLabel
                       className={`absolute left-4 top-3 m-0 -translate-y-1/2 text-up-xs font-normal text-input-focus-border peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-up-sm peer-focus-within:top-3 peer-focus-within:text-up-xs ${
                         errors[obj.name] && 'text-input-error-border'
                       }`}
                       htmlFor={obj.name}>
                       {obj.label}
-                    </label>
+                    </AppLabel>
                     <button
-                      aria-label={isShowPwd ? 'Hide password' : 'Show password'}
+                      aria-label={isShowPassword ? 'Hide password' : 'Show password'}
                       className='absolute right-[12px] top-1/2 -translate-y-1/2 cursor-pointer'
-                      onClick={() => handleShowPwdList(obj.name)}
+                      onClick={() => handleShowPasswordList(obj.name)}
                       type='button'>
-                      {isShowPwd ? <Eye size={14} /> : <EyeOff size={14} />}
+                      {isShowPassword ? <Eye size={14} /> : <EyeOff size={14} />}
                     </button>
                   </div>
                   {errors[obj.name] && (
@@ -183,7 +185,7 @@ export default function Page() {
               );
             })}
           </div>
-          <Link className='text-up-sm font-medium hover:underline' href='/login/identify'>
+          <Link className='text-up-sm font-medium hover:underline' href='/forgot'>
             Forgotten your password?
           </Link>
           {/* footer */}

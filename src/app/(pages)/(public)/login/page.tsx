@@ -1,6 +1,7 @@
 'use client';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation } from '@tanstack/react-query';
+import { useSetAtom } from 'jotai';
 import { CircleAlert, Eye, EyeOff } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -12,6 +13,7 @@ import FormWrapper from 'src/shared/components/form/FormWrapper';
 import { AppInput } from 'src/shared/components/input/AppInput';
 import SmallLoading from 'src/shared/components/loading/SmallLoading';
 import { login } from 'src/shared/services/firebase/auth/auth';
+import { currUserAtom } from 'src/shared/states/auth';
 import { z } from 'zod';
 
 export const LoginFormSchema = z.object({
@@ -26,6 +28,7 @@ export const LoginFormSchema = z.object({
 export type LoginFormType = z.infer<typeof LoginFormSchema>;
 
 export default function Page() {
+  const setCurrUser = useSetAtom(currUserAtom);
   const [showPwd, setShowPwd] = useState(false);
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -33,7 +36,8 @@ export default function Page() {
 
   const mutation = useMutation({
     mutationFn: login,
-    onSuccess() {
+    onSuccess(data) {
+      setCurrUser(data);
       router.push(redirectUrl ? redirectUrl : '/');
     },
   });
@@ -107,7 +111,8 @@ export default function Page() {
             <button
               aria-label={showPwd ? 'Hide password' : 'Show password'}
               className='absolute right-[12px] top-1/2 -translate-y-1/2 cursor-pointer'
-              onClick={handleShowPwd}>
+              onClick={handleShowPwd}
+              type='button'>
               {showPwd ? <Eye size={14} /> : <EyeOff size={14} />}
             </button>
           </div>

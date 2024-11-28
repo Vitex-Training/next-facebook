@@ -1,8 +1,9 @@
 export interface UserInfo {
+  avatar: string;
   dateOfBirth: string;
-  deactive: 'none';
+  deactivate: boolean;
   email: string;
-  firstname: string;
+  firstName: string;
   gender: 'female' | 'male';
   surname: string;
   uid: string;

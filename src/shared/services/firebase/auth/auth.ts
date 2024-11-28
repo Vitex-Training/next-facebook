@@ -16,7 +16,7 @@ export const login = async (data: LoginFormType) => {
     // update the deactive field to none
     const userDocRef = await getUserDocRefByEmail(email);
     if (userDocRef?.id) {
-      await updateUser(userDocRef.id, { deactive: 'none' });
+      await updateUser(userDocRef.id, { deactivate: false });
       const userInfo = userDocRef.data();
 
       return userInfo;
