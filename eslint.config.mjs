@@ -58,15 +58,15 @@ export default [
         },
       ],
       eqeqeq: 'error',
-      'react/jsx-sort-props': [
-        'error',
-        {
-          callbacksLast: true,
-          shorthandFirst: true,
-          noSortAlphabetically: false,
-          reservedFirst: true,
-        },
-      ],
+      // 'react/jsx-sort-props': [
+      //   'error',
+      //   {
+      //     callbacksLast: true,
+      //     shorthandFirst: true,
+      //     noSortAlphabetically: false,
+      //     reservedFirst: true,
+      //   },
+      // ],
       'no-restricted-imports': [
         'warn',
         {

@@ -1,3 +1,7 @@
-export default function Layout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <div className='flex min-h-screen items-center bg-slate-400'>{children}</div>;
+import { ChildProps } from 'src/types/general';
+
+import RequiredAuth from './components/RequiredAuth';
+
+export default function Layout({ children }: ChildProps) {
+  return <RequiredAuth>{children}</RequiredAuth>;
 }

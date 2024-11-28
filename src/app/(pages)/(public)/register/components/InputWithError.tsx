@@ -21,7 +21,7 @@ const InputWithError: React.FC<InputProps> = ({ additionalClass, errorMessage, r
         onFocus={() => setIsFocused(true)}
       />
       {errorMessage !== 'undefined' && isFocused && (
-        <div className="absolute z-10 rounded-md bg-red-500 px-3 py-1 text-sm text-white shadow-md before:absolute before:top-[-10px] before:size-0 before:border-x-[6px] before:border-b-[12px] before:border-x-transparent before:border-b-red-500 before:content-['']">
+        <div className="absolute z-10 rounded-md bg-red-500 px-3 py-1 text-sm text-white-0 shadow-md before:absolute before:top-[-10px] before:size-0 before:border-x-[6px] before:border-b-[12px] before:border-x-transparent before:border-b-red-500 before:content-['']">
           {errorMessage}
         </div>
       )}

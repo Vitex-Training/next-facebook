@@ -35,7 +35,7 @@ const formSchema = z.object({
     month: z.string(),
     year: z.string(),
   }),
-  firstname: z
+  firstName: z
     .string()
     .regex(/^[a-zA-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠƯàáâãèéêìíòóôõùúăđĩũơưăạảấầẩẫậắằẳẵặẹẻẽềềểễệỉịọỏốồổỗộớờởỡợụủứừửữựỳỵỷỹ\s]*$/, {
       message: 'Numbers and special characters are not allowed',
@@ -79,7 +79,7 @@ export default function FormRegister() {
       });
   };
   return (
-    <div className='mx-auto max-w-[432px] rounded-lg bg-white pt-1 shadow-xl'>
+    <div className='mx-auto max-w-[432px] rounded-lg bg-white-0 pt-1 shadow-xl'>
       <div className='px-[10px] py-4 *:text-center'>
         <p className='text-2xl font-bold text-[#1c1e21]'>Create a new account</p>
         <p className='text-base text-[#606770]'>It&apos;s quick and easy</p>
@@ -89,9 +89,9 @@ export default function FormRegister() {
           <div className='flex flex-col sm:flex-row sm:justify-between'>
             <InputWithError
               additionalClass='sm:w-[192px] leading-none mb-2'
-              errorMessage={String(errors.firstname?.message)}
+              errorMessage={String(errors.firstName?.message)}
               placeholder='First name'
-              register={register('firstname')}
+              register={register('firstName')}
               type='text'
             />
             <InputWithError
@@ -105,7 +105,7 @@ export default function FormRegister() {
           <div>
             <div className='relative mb-1 mt-[2divx] text-left text-xs text-[#606770]'>
               Date of birth <CircleHelpIcon className='peer inline-block' size={14} />
-              <div className='absolute z-10 hidden max-w-64 border border-slate-600 bg-white p-2 shadow-lg peer-hover:block'>
+              <div className='absolute z-10 hidden max-w-64 border border-slate-600 bg-white-0 p-2 shadow-lg peer-hover:block'>
                 Providing your birthday helps make sure that you get the right Facebook experience for your age. If you
                 want to change who sees this, go to the About section of your profile. For more details, please visit
                 our Privacy Policy.
@@ -138,7 +138,7 @@ export default function FormRegister() {
           <div className='my-2'>
             <div className='relative mb-1 mt-[2px] text-left text-xs text-[#606770]'>
               Gender <CircleHelpIcon className='peer inline-block' size={14} />
-              <div className='absolute z-10 hidden max-w-64 border border-slate-600 bg-white p-2 shadow-lg peer-hover:block'>
+              <div className='absolute z-10 hidden max-w-64 border border-slate-600 bg-white-0 p-2 shadow-lg peer-hover:block'>
                 You can change who sees your gender on your profile later. Select Custom to choose another gender, or if
                 you&apos;d rather not say.
               </div>
@@ -187,7 +187,7 @@ export default function FormRegister() {
             </a>
             . You may receive SMS notifications from us and can opt out at any time.
           </p>
-          <button className='mb-2 h-9 w-48 rounded-md bg-[#00a400] text-lg font-bold text-white'>Sign Up</button>
+          <button className='mb-2 h-9 w-48 rounded-md bg-[#00a400] text-lg font-bold text-white-0'>Sign Up</button>
           {error !== '' && <p className='text-sm text-red-700'>{error}</p>}
           <div className='py-3'>
             <Link className='text-base text-[#1877f2]' href='/login'>

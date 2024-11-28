@@ -2,7 +2,7 @@
 
 import * as SeparatorPrimitive from '@radix-ui/react-separator';
 import * as React from 'react';
-import { cn } from 'src/shared/utils/twMerge';
+import { cn } from 'src/shared/utils/className';
 
 const Separator = React.forwardRef<
   React.ComponentRef<typeof SeparatorPrimitive.Root>,

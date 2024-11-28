@@ -3,7 +3,7 @@
 import * as RadioGroupPrimitive from '@radix-ui/react-radio-group';
 import { Circle } from 'lucide-react';
 import * as React from 'react';
-import { cn } from 'src/shared/utils/twMerge';
+import { cn } from 'src/shared/utils/className';
 
 const RadioGroup = React.forwardRef<
   React.ComponentRef<typeof RadioGroupPrimitive.Root>,

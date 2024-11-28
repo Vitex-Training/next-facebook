@@ -2,27 +2,46 @@
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import InputWithError from 'src/app/(pages)/(public)/register/components/InputWithError';
 import { Avatar, AvatarFallback, AvatarImage } from 'src/shared/components/avatar/avatar';
 import { Button } from 'src/shared/components/button/Button';
 import { RadioGroup, RadioGroupItem } from 'src/shared/components/radio-group/radio-group';
 import { Separator } from 'src/shared/components/separator/separator';
+import { deactivateUserAuth } from 'src/shared/services/firebase/deactivateUser';
+import { deleteUserAuth } from 'src/shared/services/firebase/deleteUser';
+import { reauthenticateAuth } from 'src/shared/services/firebase/reauthenticate';
+
+type PasswordForm = {
+  password: string;
+};
+export type Deactivation = 'Deactivate' | 'Delete';
 
 export default function Page() {
+  const [error, setError] = useState<boolean>(false);
   const router = useRouter();
   const {
     formState: { errors },
     handleSubmit,
     register,
-  } = useForm();
-  const [action, setAction] = useState<'Deactivate' | 'Delete'>('Deactivate');
-  const handleDeactivation = (data) => {
-    console.log(data);
-    router.replace('/');
+  } = useForm<PasswordForm>();
+  const [action, setAction] = useState<Deactivation>('Deactivate');
+  const handleDeactivation: SubmitHandler<PasswordForm> = (data) => {
+    reauthenticateAuth(data.password).then((isAuthenticated) => {
+      if (!isAuthenticated) {
+        setError(true);
+        return;
+      }
+      if (action === 'Deactivate') {
+        deactivateUserAuth();
+      } else {
+        deleteUserAuth();
+      }
+      router.replace('/login');
+    });
   };
   return (
-    <div className='mx-auto max-w-xl rounded-lg bg-white'>
+    <div className='mx-auto max-w-xl rounded-lg bg-white-0'>
       <div className='p-4'>
         <h1 className='mb-0 text-[17px] font-medium text-[#080809]'>Deactivating or deleting your Facebook account</h1>
         <p className='mb-2 text-[15px]'>
@@ -85,7 +104,7 @@ export default function Page() {
             register={register('password', { required: 'Please enter your password' })}
             type='password'
           />
-          {false && <p className='text-sm text-red-500'>Your password is incorrect!</p>}
+          {error && <p className='text-sm text-red-500'>Your password is incorrect!</p>}
           <Link className='inline-block font-medium text-[#1b74e4]' href='/forgot'>
             Forgot your password?
           </Link>

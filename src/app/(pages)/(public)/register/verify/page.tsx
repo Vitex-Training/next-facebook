@@ -25,7 +25,7 @@ export default function VerifyRegister() {
   }, [searchParams, router]);
   return (
     <div className='flex h-screen items-center justify-center'>
-      <div className='mx-auto max-w-xl rounded-lg bg-white p-5'>
+      <div className='mx-auto max-w-xl rounded-lg bg-white-0 p-5'>
         <div>
           <h1 className='mb-2 text-2xl font-bold text-[#050505]'>Verification sent</h1>
           <p className='mb-2'>We sent a verify link to the email address that you provided, please check it out.</p>

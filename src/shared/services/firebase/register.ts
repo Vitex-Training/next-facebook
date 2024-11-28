@@ -11,7 +11,7 @@ export const registerAuth = async (data: RegisterType) => {
     const newFormatData = {
       ...rest,
       dateOfBirth: `${date.day}/${date.month}/${date.year}`,
-      deactive: 'none',
+      deactivate: false,
       email: data.account,
       password: data.password,
       uid,
