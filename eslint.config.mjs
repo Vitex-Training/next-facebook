@@ -42,7 +42,6 @@ export default [
       '@typescript-eslint/no-unsafe-declaration-merging': 'error',
       '@typescript-eslint/no-explicit-any': 'error',
       'tailwindcss/classnames-order': 'off',
-      'perfectionist/sort-jsx-props': 'off',
       'react-hooks/exhaustive-deps': 'error',
       'prefer-template': 'error',
       'no-console': [
@@ -59,7 +58,7 @@ export default [
         },
       ],
       eqeqeq: 'error',
-      'react/jsx-sort-props': [
+      /* 'react/jsx-sort-props': [
         'error',
         {
           callbacksLast: true,
@@ -67,7 +66,7 @@ export default [
           noSortAlphabetically: false,
           reservedFirst: true,
         },
-      ],
+      ], */
       'no-restricted-imports': [
         'warn',
         {

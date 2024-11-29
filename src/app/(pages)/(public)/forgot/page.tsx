@@ -1,35 +1,29 @@
 'use client';
+import { useMutation } from '@tanstack/react-query';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { Button } from 'src/shared/components/button/Button';
-import { User, UserError } from 'src/shared/types/userForgot';
+import { findUserInStoreByEmail } from 'src/shared/services/firebase/user/findUserByEmail';
 
 import { LoginBar } from './components/LoginBar';
 export default function Page() {
   const [email, setEmail] = useState('');
-  const [error, setError] = useState<null | UserError>(null);
+  const [error, setError] = useState<Error | null>(null);
   const router = useRouter();
+  const mutation = useMutation({
+    mutationFn: findUserInStoreByEmail,
+    onError: (err) => {
+      setError(err);
+    },
+    onSuccess: (user) => {
+      if (user) router.push(`/forgot/web?email=${user.email}&name=${user.firstName}`);
+      else setError(new Error(`Cannot find user with email ${email}`));
+    },
+  });
+
   const handleFindUser = () => {
-    setError(null);
-    fetch('/api/find-user', {
-      body: JSON.stringify({ email }),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      method: 'POST',
-    }).then((res) => {
-      if (res.status !== 200) {
-        res.json().then((err: UserError) => {
-          setError(err);
-        });
-      } else {
-        res.json().then((res: { user: User }) => {
-          // change the name prop after it is saved when a user was created
-          router.push(`/forgot/web?email=${res.user.email}&name=${res.user.firstname}`);
-        });
-      }
-    });
+    mutation.mutate(email);
   };
   return (
     <div>
@@ -41,17 +35,17 @@ export default function Page() {
           <form className='flex flex-col gap-4'>
             <input
               className='rounded-md border border-gray-200 p-2'
+              onChange={(e) => setEmail(e.target.value)}
               placeholder='Email address or mobile number'
               type='email'
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
             />
-            {!error || <small style={{ color: 'red' }}>{error.error}</small>}
+            {!error || <small style={{ color: 'red' }}>{error.message}</small>}
             <div className='ml-auto flex gap-2'>
               <Button asChild className='bg-gray-200 text-black' type='button'>
                 <Link href='/login'>Cancel</Link>
               </Button>
-              <Button className='bg-blue-600 text-white' type='button' onClick={handleFindUser}>
+              <Button className='bg-blue-600 text-white' onClick={handleFindUser} type='button'>
                 Search
               </Button>
             </div>

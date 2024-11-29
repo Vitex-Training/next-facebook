@@ -37,7 +37,7 @@ export default function Page() {
             <Button className='bg-blue-600 text-xl font-semibold text-white' type='button'>
               Log in
             </Button>
-            <Button className='bg-gray-200 text-xl font-semibold text-black' type='button' onClick={handleTryOtherWay}>
+            <Button className='bg-gray-200 text-xl font-semibold text-black' onClick={handleTryOtherWay} type='button'>
               Try another way
             </Button>
           </form>
