@@ -9,16 +9,11 @@ import { findUserInStoreByEmail } from 'src/shared/services/firebase/user/findUs
 import { LoginBar } from './components/LoginBar';
 export default function Page() {
   const [email, setEmail] = useState('');
-  const [error, setError] = useState<Error | null>(null);
   const router = useRouter();
   const mutation = useMutation({
     mutationFn: findUserInStoreByEmail,
-    onError: (err) => {
-      setError(err);
-    },
     onSuccess: (user) => {
       if (user) router.push(`/forgot/web?email=${user.email}&name=${user.firstName}`);
-      else setError(new Error(`Cannot find user with email ${email}`));
     },
   });
 
@@ -40,7 +35,6 @@ export default function Page() {
               type='email'
               value={email}
             />
-            {!error || <small style={{ color: 'red' }}>{error.message}</small>}
             <div className='ml-auto flex gap-2'>
               <Button asChild className='bg-gray-200 text-black' type='button'>
                 <Link href='/login'>Cancel</Link>
