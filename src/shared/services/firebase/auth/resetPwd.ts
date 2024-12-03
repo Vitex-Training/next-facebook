@@ -1,9 +1,9 @@
 import { FirebaseError } from 'firebase/app';
 import { EmailAuthProvider, reauthenticateWithCredential, updatePassword } from 'firebase/auth';
-import { ResetPwdFormType } from 'src/app/(pages)/(private)/reset-password/page';
+import { ResetPasswordFormType } from 'src/app/(pages)/(private)/reset-password/page';
 import { auth } from 'src/shared/services/firebase/config';
 
-export const resetPwd = async (data: ResetPwdFormType) => {
+export const resetPwd = async (data: ResetPasswordFormType) => {
   const user = auth.currentUser;
 
   if (!user) throw new Error('Unauthorization');
