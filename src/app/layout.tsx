@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import React from 'react';
 import JoiProvider from 'src/contexts/JoiProvider';
+import { Toaster } from 'src/shared/components/toast/toaster';
 
 import ReactQueryProvider from '../contexts/ReactQueryProvider';
 import './globals.css';
@@ -24,6 +25,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <ReactQueryProvider>
           <JoiProvider>{children}</JoiProvider>
+          <Toaster />
         </ReactQueryProvider>
       </body>
     </html>
