@@ -1,10 +1,14 @@
-import { ClassValue, clsx } from 'clsx';
-import { twMerge } from 'tailwind-merge';
+import { type ClassValue, clsx } from 'clsx';
+import { extendTailwindMerge } from 'tailwind-merge';
 
-/**
- * Merge class names with Tailwind CSS and clsx to support conditional classes. Also wrap it with tailwind-merge to respect the order of classes defined in component template rather than the order of the class in the generated CSS file.
- * @param classes
- */
-export function cn(...classes: ClassValue[]) {
-  return twMerge(clsx(...classes));
+const customTwMerge = extendTailwindMerge({
+  extend: {
+    classGroups: {
+      'font-size': [{ text: ['up-base', 'up-sm', 'up-xs'] }],
+    },
+  },
+});
+
+export function cn(...inputs: ClassValue[]) {
+  return customTwMerge(clsx(inputs));
 }

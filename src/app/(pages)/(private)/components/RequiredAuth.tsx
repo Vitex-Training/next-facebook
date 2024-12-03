@@ -3,8 +3,8 @@
 import { onAuthStateChanged } from 'firebase/auth';
 import { usePathname, useRouter } from 'next/navigation';
 import { useEffect } from 'react';
-import { auth } from 'src/services/firebase';
-import { ChildProps } from 'src/types/general';
+import { auth } from 'src/shared/services/firebase/config';
+import { ChildProps } from 'src/shared/types/general';
 
 export default function RequiredAuth({ children }: ChildProps) {
   const router = useRouter();

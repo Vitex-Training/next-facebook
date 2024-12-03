@@ -2,9 +2,9 @@ import type { Metadata } from 'next';
 
 import { Inter } from 'next/font/google';
 import React from 'react';
-import JoiProvider from 'src/contexts/JoiProvider';
+import JoiProvider from 'src/shared/providers/JoiProvider';
 
-import ReactQueryProvider from '../contexts/ReactQueryProvider';
+import ReactQueryProvider from '../shared/providers/ReactQueryProvider';
 import './globals.css';
 
 const inter = Inter({ subsets: ['latin'] });
