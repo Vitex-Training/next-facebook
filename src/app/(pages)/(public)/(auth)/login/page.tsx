@@ -11,6 +11,7 @@ import { login } from 'src/lib/actions/auth';
 import { AppButton } from 'src/shared/components/button/AppButton';
 import FormWrapper from 'src/shared/components/common/FormWrapper';
 import SmallLoading from 'src/shared/components/loading/SmallLoading';
+import { toast } from 'src/shared/hooks/use-toast';
 import { z } from 'zod';
 
 export const LoginFormSchema = z.object({
@@ -129,6 +130,13 @@ export default function Page() {
           </div>
         </FormWrapper>
       </FormProvider>
+      <button onClick={() => {
+        toast({
+          title: 'Oi doi oi',
+          description: 'Oh my god',
+          variant: 'info'
+        })
+      }} >BCD</button>
     </main>
   );
 }

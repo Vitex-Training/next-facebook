@@ -1,6 +1,6 @@
 'use client';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import InputWithError from 'src/app/(pages)/(public)/register/components/InputWithError';
@@ -20,6 +20,8 @@ export type Deactivation = 'Deactivate' | 'Delete';
 export default function Page() {
   const [error, setError] = useState<boolean>(false);
   const router = useRouter();
+  const pathname = usePathname();
+  console.log(pathname);
   const {
     formState: { errors },
     handleSubmit,
@@ -37,7 +39,7 @@ export default function Page() {
       } else {
         deleteUserAuth();
       }
-      router.replace('/login');
+      routerApp.replace('/login');
     });
   };
   return (
