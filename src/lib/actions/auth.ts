@@ -1,7 +1,7 @@
 import { FirebaseError } from 'firebase/app';
 import { browserSessionPersistence, setPersistence, signInWithEmailAndPassword, signOut } from 'firebase/auth';
 import { LoginFormType } from 'src/app/(pages)/(public)/(auth)/login/page';
-import { auth } from 'src/services/firebase';
+import { auth } from 'src/shared/services/firebase/config';
 export const login = async (data: LoginFormType) => {
   const { email, password } = data;
   try {

@@ -3,9 +3,10 @@ import { Timestamp } from 'firebase/firestore';
 import { UserInfo } from './user';
 
 export interface UserNotification {
+  actorUid: UserInfo['uid'];
   createdAt: Timestamp;
-  id: string;
+  isRead: boolean;
   message: string;
-  status: 'read' | 'unread';
+  type: string;
   uid: UserInfo['uid'];
 }

@@ -11,6 +11,7 @@ import { login } from 'src/lib/actions/auth';
 import { AppButton } from 'src/shared/components/button/AppButton';
 import FormWrapper from 'src/shared/components/common/FormWrapper';
 import SmallLoading from 'src/shared/components/loading/SmallLoading';
+import { sendFriendRequest } from 'src/shared/services/firebase/userRelationship/sendFriendRequest';
 import { z } from 'zod';
 
 export const LoginFormSchema = z.object({
@@ -56,7 +57,7 @@ export default function Page() {
   const handleShowPwd = () => {
     setShowPwd((prev) => !prev);
   };
-
+  sendFriendRequest('sendidnew', 'targetidnew');
   return (
     <main className='flex flex-col items-center p-2 pt-[36px] sm:p-0'>
       <div className='text-center'>
