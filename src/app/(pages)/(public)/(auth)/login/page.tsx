@@ -11,7 +11,7 @@ import { login } from 'src/lib/actions/auth';
 import { AppButton } from 'src/shared/components/button/AppButton';
 import FormWrapper from 'src/shared/components/common/FormWrapper';
 import SmallLoading from 'src/shared/components/loading/SmallLoading';
-import { sendFriendRequest } from 'src/shared/services/firebase/userRelationship/sendFriendRequest';
+import { sendFriendRequest } from 'src/shared/services/firebase/friendShip/sendFriendRequest';
 import { z } from 'zod';
 
 export const LoginFormSchema = z.object({
