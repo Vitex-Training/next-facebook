@@ -1,7 +1,7 @@
 'use client';
 import { useMutation } from '@tanstack/react-query';
 import Link from 'next/link';
-import { logout } from 'src/lib/actions/auth';
+import { logout } from 'src/shared/services/firebase/auth/auth';
 import { auth } from 'src/shared/services/firebase/config';
 
 export default function Page() {
@@ -18,9 +18,8 @@ export default function Page() {
     <div>
       <p>{user?.email}</p>
       <button onClick={onLogout}>Log out</button>
-      <Link className='ml-10 inline-block' href='/deactivation'>
-        Deactivation page
-      </Link>
+      <Link href='/reset-password'>Reset password</Link>
+      <Link href='/deactivation'>Deactivation</Link>
     </div>
   );
 }

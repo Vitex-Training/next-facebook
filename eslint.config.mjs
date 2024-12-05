@@ -1,11 +1,12 @@
+import { FlatCompat } from '@eslint/eslintrc';
+import js from '@eslint/js';
 import typescriptEslint from '@typescript-eslint/eslint-plugin';
 import { FlatCompat } from '@eslint/eslintrc';
 import tsParser from '@typescript-eslint/parser';
-import path from 'node:path';
 import perfectionist from 'eslint-plugin-perfectionist';
-import { fileURLToPath } from 'node:url';
-import js from '@eslint/js';
 import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);

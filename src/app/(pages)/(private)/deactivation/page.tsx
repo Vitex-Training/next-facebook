@@ -39,11 +39,11 @@ export default function Page() {
       } else {
         deleteUserAuth();
       }
-      routerApp.replace('/login');
+      router.replace('/login');
     });
   };
   return (
-    <div className='mx-auto max-w-xl rounded-lg bg-white-0'>
+    <div className='mx-auto max-w-xl rounded-lg bg-white'>
       <div className='p-4'>
         <h1 className='mb-0 text-[17px] font-medium text-[#080809]'>Deactivating or deleting your Facebook account</h1>
         <p className='mb-2 text-[15px]'>
