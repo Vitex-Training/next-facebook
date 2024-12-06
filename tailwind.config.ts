@@ -66,6 +66,14 @@ const config: Config = {
           border: 'hsl(var(--info-border))',
         },
 
+        tooltip: {
+          DEFAULT: 'hsla(var(--tooltip))',
+        },
+
+        lightgray: {
+          DEFAULT: 'hsla(var(--lightgray))',
+        },
+
         muted: {
           DEFAULT: 'hsl(var(--muted))',
           foreground: 'hsl(var(--muted-foreground))',
