@@ -13,7 +13,7 @@ import FormWrapper from 'src/shared/components/form/FormWrapper';
 import { AppInput } from 'src/shared/components/input/AppInput';
 import SmallLoading from 'src/shared/components/loading/SmallLoading';
 import { login } from 'src/shared/services/firebase/auth/auth';
-import { currUserAtom } from 'src/shared/states/auth';
+import { currentUserAtom } from 'src/shared/states/auth';
 import { z } from 'zod';
 
 export const LoginFormSchema = z.object({
@@ -28,7 +28,7 @@ export const LoginFormSchema = z.object({
 export type LoginFormType = z.infer<typeof LoginFormSchema>;
 
 export default function Page() {
-  const setCurrUser = useSetAtom(currUserAtom);
+  const setcurrentUser = useSetAtom(currentUserAtom);
   const [showPwd, setShowPwd] = useState(false);
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -37,7 +37,7 @@ export default function Page() {
   const mutation = useMutation({
     mutationFn: login,
     onSuccess(data) {
-      setCurrUser(data);
+      setcurrentUser(data);
       router.push(redirectUrl ? redirectUrl : '/');
     },
   });

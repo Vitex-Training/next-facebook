@@ -1,5 +1,8 @@
+import { FileLinkType } from './general';
+
 export interface UserInfo {
-  avatar: string;
+  avatar?: string;
+  coverPhoto?: FileLinkType;
   dateOfBirth: string;
   deactivate: boolean;
   email: string;
