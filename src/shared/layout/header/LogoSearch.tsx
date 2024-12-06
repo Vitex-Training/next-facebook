@@ -4,6 +4,7 @@ import _ from 'lodash';
 import { ArrowLeft, Search, X } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useEffect, useMemo, useState } from 'react';
 import { AppAvatar, AppAvatarImage } from 'src/shared/components/avatar/AppAvatar';
 import { AppButton } from 'src/shared/components/button/AppButton';
@@ -32,6 +33,7 @@ interface UserInfoExtend extends UserInfo {
 }
 
 export default function LogoSearch() {
+  const router = useRouter();
   const [openInputSearch, setOpenInputSearch] = useState(false);
   const [inputSearchValue, setInputSearchValue] = useState('');
   const [searchSuggestions, setSearchSuggestions] = useState<UserInfoExtend[]>([]);
@@ -41,6 +43,11 @@ export default function LogoSearch() {
 
     const otherSuggestions = searchSuggestions.filter((suggestion) => suggestion.uid !== uid);
     setSearchSuggestions(otherSuggestions);
+  };
+
+  const selectUser = (uid: UserInfo['uid']) => {
+    setOpenInputSearch(false);
+    router.push(`/profile/${uid}`);
   };
 
   const handleFilter = async (inputSearchValue: string) => {
@@ -129,13 +136,11 @@ export default function LogoSearch() {
                       <AppCommandItem
                         asChild
                         key={user.uid}
-                        onSelect={(currentValue) => {
-                          setInputSearchValue(currentValue === inputSearchValue ? '' : currentValue);
+                        onSelect={() => {
+                          selectUser(user.uid);
                         }}
                         value={getFullName(user)}>
-                        <div
-                          // onClick={() => handleSelectUser(user)}
-                          className='flex items-center justify-between gap-2 hover:bg-lightgray'>
+                        <div className='flex items-center justify-between gap-2 hover:bg-lightgray'>
                           <div className='flex items-center justify-start gap-2'>
                             <AppAvatar className='size-8'>
                               <AppAvatarImage src={user?.avatar} />

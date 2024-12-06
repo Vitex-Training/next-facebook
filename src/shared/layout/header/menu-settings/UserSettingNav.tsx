@@ -3,17 +3,17 @@ import { useAtomValue } from 'jotai';
 import { LogOut, Settings } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import CurrUserAvatar from 'src/shared/components/avatar/CurrUserAvatar';
+import CurrentUserAvatar from 'src/shared/components/avatar/CurrentUserAvatar';
 import { AppButton } from 'src/shared/components/button/AppButton';
 import AppDivider from 'src/shared/components/divider/AppDivider';
 import { logout } from 'src/shared/services/firebase/auth/auth';
-import { currUserAtom } from 'src/shared/states/auth';
+import { currentUserAtom } from 'src/shared/states/auth';
 import { NavItem } from 'src/shared/types/general';
 
 const navs: NavItem[] = [{ icon: Settings, label: 'Cài đặt và quyền riêng tư', link: '/settings' }];
 
 export default function UserSettingNav() {
-  const currUser = useAtomValue(currUserAtom);
+  const currentUser = useAtomValue(currentUserAtom);
   const router = useRouter();
   const mutation = useMutation({
     mutationFn: logout,
@@ -24,15 +24,15 @@ export default function UserSettingNav() {
   };
 
   const handleGotoProfile = () => {
-    router.push(`/profile/${currUser?.uid}`);
+    router.push(`/profile/${currentUser?.uid}`);
   };
 
   return (
     <div className='flex w-[calc(100vw-2rem)] flex-col gap-3 md:w-[360px]'>
       <div className='flex flex-col gap-3 rounded-md p-3 shadow-lg'>
         <div className='flex items-center justify-start gap-2'>
-          <CurrUserAvatar />
-          <span className='text-lg font-semibold'>{currUser?.firstName}</span>
+          <CurrentUserAvatar />
+          <span className='text-lg font-semibold'>{currentUser?.firstName}</span>
         </div>
         <AppDivider />
         <AppButton className='rounded-md' onClick={handleGotoProfile} type='button' variant='icon'>

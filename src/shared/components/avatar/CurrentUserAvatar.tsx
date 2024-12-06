@@ -1,18 +1,18 @@
 import * as AvatarPrimitive from '@radix-ui/react-avatar';
 import { useAtomValue } from 'jotai';
-import { currUserAtom } from 'src/shared/states/auth';
+import { currentUserAtom } from 'src/shared/states/auth';
 
 import { AppAvatar, AppAvatarImage } from './AppAvatar';
 
-export default function CurrUserAvatar({
+export default function CurrentUserAvatar({
   className,
   ...props
 }: React.ComponentPropsWithoutRef<typeof AvatarPrimitive.Root>) {
-  const currUser = useAtomValue(currUserAtom)!;
+  const currentUser = useAtomValue(currentUserAtom)!;
 
   return (
     <AppAvatar {...{ className, ...props }}>
-      <AppAvatarImage alt={currUser.firstName} src={currUser?.avatar} />
+      <AppAvatarImage alt={currentUser.firstName} src={currentUser?.avatar} />
     </AppAvatar>
   );
 }

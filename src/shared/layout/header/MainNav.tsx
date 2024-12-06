@@ -3,8 +3,9 @@ import { House, ShoppingBag, Users, Video } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import TooltipWrapper from 'src/shared/components/tooltip/TooltipWrapper';
+import { NavItem } from 'src/shared/types/general';
 
-const navs = [
+const navs: NavItem[] = [
   {
     icon: House,
     label: 'Trang chủ',

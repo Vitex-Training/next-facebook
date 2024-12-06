@@ -2,7 +2,7 @@
 
 import * as VisuallyHidden from '@radix-ui/react-visually-hidden';
 import { Bell, ChevronDown, Menu, MessageCircleMore } from 'lucide-react';
-import CurrUserAvatar from 'src/shared/components/avatar/CurrUserAvatar';
+import CurrentUserAvatar from 'src/shared/components/avatar/CurrentUserAvatar';
 import { AppBadgeSticker, AppBadgeStickerContent } from 'src/shared/components/badge-sticker/AppBadgeSticker';
 import { AppButton } from 'src/shared/components/button/AppButton';
 import {
@@ -12,13 +12,12 @@ import {
   AppDropdownMenuTrigger,
 } from 'src/shared/components/dropdown-menu/AppDropdownMenu';
 import TooltipWrapper from 'src/shared/components/tooltip/TooltipWrapper';
-
 import ChatsNotices from './menu-settings/ChatsNotices';
 import MenuNav from './menu-settings/MenuNav';
 import Notifications from './menu-settings/Notifications';
 import UserSettingNav from './menu-settings/UserSettingNav';
 
-const CurrUserAvatarWithBarge = () => {
+const CurrentUserAvatarWithBarge = () => {
   return (
     <div aria-expanded={false} aria-label='Trang cá nhân của bạn' role='button' tabIndex={1}>
       <AppBadgeSticker>
@@ -27,7 +26,7 @@ const CurrUserAvatarWithBarge = () => {
             <ChevronDown size={10} />
           </div>
         </AppBadgeStickerContent>
-        <CurrUserAvatar />
+        <CurrentUserAvatar />
       </AppBadgeSticker>
     </div>
   );
@@ -39,7 +38,7 @@ const menuSettings = [
   { dropdownComp: Notifications, iconComp: Bell, isButton: true, label: 'Thông báo' },
   {
     dropdownComp: UserSettingNav,
-    iconComp: CurrUserAvatarWithBarge,
+    iconComp: CurrentUserAvatarWithBarge,
     isButton: false,
     label: 'Cài đặt và kiểm soát tài khoản',
   },

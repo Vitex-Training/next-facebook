@@ -29,12 +29,12 @@ export default function Friends() {
     <div className='flex flex-col'>
       <div>
         <AppCommand>
-          <div className='flex items-center justify-between gap-2 px-2'>
+          <div className='flex items-center justify-between gap-2 px-2 md:justify-end'>
             <AppCommandInput placeholder='Tìm kiếm bạn bè' />
             <Search />
           </div>
-          <AppCommandList className=''>
-            <AppCommandEmpty>No friends found</AppCommandEmpty>
+          <AppCommandList>
+            <AppCommandEmpty>Không tìm thấy người bạn nào</AppCommandEmpty>
             <AppCommandGroup className='[&_[cmdk-group-items]]:col-auto [&_[cmdk-group-items]]:grid [&_[cmdk-group-items]]:grid-cols-3 md:[&_[cmdk-group-items]]:grid-cols-6'>
               {data?.map((user) => {
                 return (

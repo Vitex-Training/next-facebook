@@ -13,7 +13,7 @@ import { AppTabs, AppTabsContent, AppTabsList, AppTabsTrigger } from 'src/shared
 import acceptFriendRequest from 'src/shared/services/firebase/friendShip/acceptFriendRequest';
 import declineFriendRequest from 'src/shared/services/firebase/friendShip/declineFriendRequest';
 import { getNotifications } from 'src/shared/services/firebase/notification/getNotifications';
-import { currUserAtom } from 'src/shared/states/auth';
+import { currentUserAtom } from 'src/shared/states/auth';
 import { TabItem } from 'src/shared/types/general';
 import { NotificationFilterType } from 'src/shared/types/notification';
 import { getFullName } from 'src/shared/utils/getFullName';
@@ -30,17 +30,17 @@ const filterOptions: TabItem<NotificationFilterType>[] = [
 ];
 
 export default function Notifications() {
-  const currUser = useAtomValue(currUserAtom);
+  const currentUser = useAtomValue(currentUserAtom);
   const [tab, setTab] = useState<NotificationFilterType>(filterOptions[0]!.value!);
 
   const { data } = useQuery({
-    enabled: !!currUser?.uid,
+    enabled: !!currentUser?.uid,
     queryFn: async () => {
-      const notifications = await getNotifications(currUser!.uid, tab);
+      const notifications = await getNotifications(currentUser!.uid, tab);
 
       return notifications;
     },
-    queryKey: ['notifications', currUser!.uid, { filterType: tab }],
+    queryKey: ['notifications', currentUser!.uid, { filterType: tab }],
   });
 
   const onTabChange = (value: string) => {
@@ -104,14 +104,14 @@ export default function Notifications() {
                               <div className='flex items-center gap-2'>
                                 <AppButton
                                   className='flex-1'
-                                  onClick={() => declineFriendRequest(notification.senderUid, currUser!.uid)}
+                                  onClick={() => declineFriendRequest(notification.senderUid, currentUser!.uid)}
                                   type='button'
                                   variant='icon'>
                                   Từ chối
                                 </AppButton>
                                 <AppButton
                                   className='flex-1'
-                                  onClick={() => acceptFriendRequest(notification.senderUid, currUser!.uid)}
+                                  onClick={() => acceptFriendRequest(notification.senderUid, currentUser!.uid)}
                                   type='button'>
                                   Chấp nhận
                                 </AppButton>

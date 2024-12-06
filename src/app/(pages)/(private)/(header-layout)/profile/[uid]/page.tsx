@@ -22,7 +22,7 @@ import { AppTabs, AppTabsContent, AppTabsList, AppTabsTrigger } from 'src/shared
 import sendFriendRequest from 'src/shared/services/firebase/friendShip/sendFriendRequest';
 import { getFriendsOfUser } from 'src/shared/services/firebase/user/getFriendsOfUser';
 import { getUserInfoByUid } from 'src/shared/services/firebase/user/getUserInfoByUid';
-import { currUserAtom } from 'src/shared/states/auth';
+import { currentUserAtom } from 'src/shared/states/auth';
 import { UserInfo } from 'src/shared/types/user';
 import { getFullName } from 'src/shared/utils/getFullName';
 
@@ -30,29 +30,6 @@ import Friends from './components/Friends';
 import Photos from './components/Photos';
 import Posts from './components/Posts';
 import Videos from './components/Videos';
-
-const friends: UserInfo[] = [
-  {
-    avatar: '',
-    dateOfBirth: 'string',
-    deactivate: false,
-    email: 'string',
-    firstName: 'string',
-    gender: 'female',
-    surname: 'string',
-    uid: 'string',
-  },
-  {
-    avatar: '',
-    dateOfBirth: 'string',
-    deactivate: false,
-    email: 'string',
-    firstName: 'string',
-    gender: 'female',
-    surname: 'string',
-    uid: 'string',
-  },
-];
 
 const tabs = [
   { comp: Posts, label: 'Bài viết', value: 'posts' },
@@ -67,7 +44,7 @@ interface UserInfoExtend extends UserInfo {
 
 export default function Page() {
   const params = useParams<{ uid: UserInfo['uid'] }>();
-  const currUser = useAtomValue(currUserAtom);
+  const currentUser = useAtomValue(currentUserAtom);
   const [profile, setProfile] = useState<UserInfoExtend>({
     avatar: '',
     coverPhoto: {
@@ -80,7 +57,7 @@ export default function Page() {
     deactivate: false,
     email: '',
     firstName: '',
-    friends,
+    friends: [],
     gender: 'female',
     surname: '',
     uid: '',
@@ -103,9 +80,9 @@ export default function Page() {
     refetchOnWindowFocus: false,
   });
 
-  const isCurrUserBeFriendThisUser = useMemo(
-    () => profile.friends.find((user) => user.uid === currUser?.uid),
-    [profile, currUser],
+  const iscurrentUserBeFriendThisUser = useMemo(
+    () => profile.friends.find((user) => user.uid === currentUser?.uid),
+    [profile, currentUser],
   );
 
   useEffect(() => {
@@ -128,7 +105,7 @@ export default function Page() {
               src={profile?.coverPhoto?.link ? profile?.coverPhoto?.link : '/default-avatar.jpg'}
               width={100}
             />
-            {currUser?.uid === params.uid ? (
+            {currentUser?.uid === params.uid ? (
               <div className='absolute bottom-3 right-3'>
                 <AppDropdownMenu>
                   <AppDropdownMenuTrigger asChild>
@@ -164,7 +141,7 @@ export default function Page() {
             {/* avatar and relationships */}
             <div className='relative flex flex-col items-center justify-between gap-4 md:top-0 md:flex-row'>
               <div className='flex flex-col items-center justify-center gap-3 md:flex-row md:justify-start'>
-                {currUser?.uid === params.uid ? (
+                {currentUser?.uid === params.uid ? (
                   <AppBadgeSticker className='absolute top-[-88px] md:relative md:top-0'>
                     <AppBadgeStickerContent>
                       <AppButton size='icon' variant='icon'>
@@ -200,7 +177,7 @@ export default function Page() {
 
               {/* action btn */}
               <div className='flex w-full flex-col items-center justify-center gap-3 md:w-auto md:flex-row md:justify-end'>
-                {currUser?.uid === params.uid ? (
+                {currentUser?.uid === params.uid ? (
                   <>
                     <AppButton className='w-full md:w-auto' type='button'>
                       <Plus size={14} />
@@ -214,10 +191,10 @@ export default function Page() {
                   </>
                 ) : (
                   <>
-                    {!isCurrUserBeFriendThisUser ? (
+                    {!iscurrentUserBeFriendThisUser ? (
                       <AppButton
                         className='w-full md:w-auto'
-                        onClick={() => sendFriendRequest(currUser!.uid, profile.uid)}
+                        onClick={() => sendFriendRequest(currentUser!.uid, profile.uid)}
                         type='button'>
                         <Plus size={14} />
                         Gửi lời mời kết bạn
