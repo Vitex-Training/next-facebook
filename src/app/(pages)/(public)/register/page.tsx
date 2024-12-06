@@ -213,7 +213,7 @@ export default function RegisterPage() {
               . You may receive SMS notifications from us and can opt out at any time.
             </p>
             <div className='mb-2 flex items-center justify-center gap-4'>
-              <AppButton className='w-48' disabled={mutation.isPending} type='submit' variant='create'>
+              <AppButton className='w-48' disabled={mutation.isPending} type='submit' variant='secondary'>
                 Sign Up
               </AppButton>
               <div>{mutation.isPending ? <SmallLoading /> : null}</div>
