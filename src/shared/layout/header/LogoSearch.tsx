@@ -23,7 +23,7 @@ import {
   AppPopoverContent,
   AppPopoverTrigger,
 } from 'src/shared/components/popover/AppPopover';
-import { filterUsers } from 'src/shared/services/firebase/user/filterUsers';
+import { filterUsersNotIncludeDeactivate } from 'src/shared/services/firebase/user/filterUsersNotIncludeDeactivate';
 import { ClickBtnEventType } from 'src/shared/types/general';
 import { UserInfo } from 'src/shared/types/user';
 import { getFullName } from 'src/shared/utils/getFullName';
@@ -57,7 +57,7 @@ export default function LogoSearch() {
       const fullName = getFullName(user);
       return fullName.toLowerCase().includes(wellFormatSearch);
     };
-    const filteredUsers = await filterUsers(filterFn);
+    const filteredUsers = await filterUsersNotIncludeDeactivate(filterFn);
 
     // hard code for notification of user
     setSearchSuggestions(filteredUsers.map((user) => ({ ...user, numberOfNotification: 2 })));

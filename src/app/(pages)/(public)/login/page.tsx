@@ -28,7 +28,7 @@ export const LoginFormSchema = z.object({
 export type LoginFormType = z.infer<typeof LoginFormSchema>;
 
 export default function Page() {
-  const setcurrentUser = useSetAtom(currentUserAtom);
+  const setCurrentUser = useSetAtom(currentUserAtom);
   const [showPwd, setShowPwd] = useState(false);
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -37,7 +37,7 @@ export default function Page() {
   const mutation = useMutation({
     mutationFn: login,
     onSuccess(data) {
-      setcurrentUser(data);
+      setCurrentUser(data);
       router.push(redirectUrl ? redirectUrl : '/');
     },
   });

@@ -12,14 +12,14 @@ import { ChildProps } from 'src/shared/types/general';
 export default function RequiredAuth({ children }: ChildProps) {
   const router = useRouter();
   const pathname = usePathname();
-  const [currentUser, setcurrentUser] = useAtom(currentUserAtom);
+  const [currentUser, setCurrentUser] = useAtom(currentUserAtom);
 
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, async (user) => {
       if (user) {
         const uid = user.uid;
         const userInfo = await getUserInfoByUid(uid);
-        setcurrentUser(userInfo);
+        setCurrentUser(userInfo);
         return;
       }
       const url = pathname !== '/' ? `/login?redirectUrl=${pathname}` : '/login';
@@ -28,7 +28,7 @@ export default function RequiredAuth({ children }: ChildProps) {
     return () => {
       unSubscribe();
     };
-  }, [setcurrentUser, pathname, router]);
+  }, [setCurrentUser, pathname, router]);
 
   if (!currentUser) return null;
 

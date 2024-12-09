@@ -2,7 +2,7 @@ import { getDocs, query, where } from 'firebase/firestore';
 import { UserInfo } from 'src/shared/types/user';
 import { getCollectionRef } from 'src/shared/utils/getCollectionRef';
 
-export async function filterUsers(filterFn: (user: UserInfo) => boolean) {
+export async function filterUsersNotIncludeDeactivate(filterFn: (user: UserInfo) => boolean) {
   const q = query(getCollectionRef<UserInfo>('users'), where('deactivate', '!=', true));
   const querySnapshot = await getDocs(q);
 

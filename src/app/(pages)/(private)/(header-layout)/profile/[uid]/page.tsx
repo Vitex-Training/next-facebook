@@ -20,6 +20,7 @@ import {
 } from 'src/shared/components/dropdown-menu/AppDropdownMenu';
 import { AppTabs, AppTabsContent, AppTabsList, AppTabsTrigger } from 'src/shared/components/tabs/AppTabs';
 import sendFriendRequest from 'src/shared/services/firebase/friendShip/sendFriendRequest';
+import { getFollowersOfUser } from 'src/shared/services/firebase/user/getFollowersOfUser';
 import { getFriendsOfUser } from 'src/shared/services/firebase/user/getFriendsOfUser';
 import { getUserInfoByUid } from 'src/shared/services/firebase/user/getUserInfoByUid';
 import { currentUserAtom } from 'src/shared/states/auth';
@@ -39,6 +40,7 @@ const tabs = [
 ];
 
 interface UserInfoExtend extends UserInfo {
+  followers: UserInfo[];
   friends: UserInfo[];
 }
 
@@ -57,6 +59,7 @@ export default function Page() {
     deactivate: false,
     email: '',
     firstName: '',
+    followers: [],
     friends: [],
     gender: 'female',
     surname: '',
@@ -72,16 +75,22 @@ export default function Page() {
       if (!user) throw new Error('User not found');
 
       const friends = await getFriendsOfUser(uid);
+      const followers = await getFollowersOfUser(uid);
 
-      return { ...user, friends };
+      return { ...user, followers, friends };
     },
     queryKey: ['users', params.uid],
     refetchOnReconnect: false,
     refetchOnWindowFocus: false,
   });
 
-  const iscurrentUserBeFriendThisUser = useMemo(
+  const isCurrentUserBeFriendThisUser = useMemo(
     () => profile.friends.find((user) => user.uid === currentUser?.uid),
+    [profile, currentUser],
+  );
+
+  const isCurrentUserFollowThisUser = useMemo(
+    () => profile.followers.find((user) => user.uid === currentUser?.uid),
     [profile, currentUser],
   );
 
@@ -191,7 +200,7 @@ export default function Page() {
                   </>
                 ) : (
                   <>
-                    {!iscurrentUserBeFriendThisUser ? (
+                    {!isCurrentUserBeFriendThisUser ? (
                       <AppButton
                         className='w-full md:w-auto'
                         onClick={() => sendFriendRequest(currentUser!.uid, profile.uid)}
@@ -200,10 +209,12 @@ export default function Page() {
                         Gửi lời mời kết bạn
                       </AppButton>
                     ) : null}
-                    <AppButton className='w-full md:w-auto' type='button' variant='icon'>
-                      <Edit size={14} />
-                      Theo dõi
-                    </AppButton>
+                    {!isCurrentUserFollowThisUser ? (
+                      <AppButton className='w-full md:w-auto' type='button' variant='icon'>
+                        <Edit size={14} />
+                        Theo dõi
+                      </AppButton>
+                    ) : null}
                   </>
                 )}
               </div>

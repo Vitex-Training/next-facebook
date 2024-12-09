@@ -7,7 +7,7 @@ export default function Header() {
     <header className='flex h-header items-center justify-between bg-white px-4 py-2'>
       <LogoSearch />
 
-      <div className='fixed left-[300px] right-[206px] top-0 hidden h-header md:block'>
+      <div className='fixed left-[300px] right-[206px] top-0 z-10 hidden h-header md:block'>
         <MainNav />
       </div>
 

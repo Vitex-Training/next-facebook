@@ -22,7 +22,7 @@ const navs: NavItem[] = [
     description: 'Kết nối với những người cùng chung sở thích',
     icon: Users,
     label: 'Nhóm',
-    link: '/group',
+    link: '/groups',
   },
   {
     description: 'Xem bài biết của những người bạn theo dõi',

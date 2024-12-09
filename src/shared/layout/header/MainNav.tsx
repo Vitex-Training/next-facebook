@@ -24,7 +24,7 @@ const navs: NavItem[] = [
   {
     icon: Users,
     label: 'Nhóm',
-    link: '/group',
+    link: '/groups',
   },
 ];
 
